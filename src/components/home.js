@@ -15,6 +15,7 @@ import {
     TextInput,
     View
 } from 'react-native';
+import Login from './login.js'
 
 
 export default class Home extends Component {
@@ -24,7 +25,7 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: ''
+            openLogin: false
         }
     }
     render() {
@@ -35,17 +36,13 @@ export default class Home extends Component {
                 <View style={{flex: 5, justifyContent: 'flex-start', alignItems: 'center'}}>
                     <Image resizeMode = 'cover' source={require('../resources/img/expertizo_logo.jpg')} style={{width: width * 0.8, height:  width * 0.8}} />
                 </View>
-                <View style={{flex: 2, justifyContent: 'flex-end', padding: 20}}>
-                    <TextInput placeholder="Email" style={{ borderWidth:1, height:40}}></TextInput>
-                    <TextInput placeholder="Password" style={{ borderWidth:1, height:40}}></TextInput>
-                </View>
-                <View style={{flex: 2, flexDirection: 'row', margin: 20, justifyContent: 'space-around', alignItems: 'flex-start'}}>
+                <View style={{flex: 4, flexDirection: 'row', margin: 20, justifyContent: 'space-around', alignItems: 'flex-start'}}>
                     <View style={{height: 40, flex: 1, margin: 10}}>
                         <Button
                         color="#510c65"
                         title="Login"
                         onPress={() =>
-                                  navigate('Profile')
+                                  this.setState({openLogin: !this.state.openLogin})
                                 }
                         />
                     </View>
@@ -59,6 +56,7 @@ export default class Home extends Component {
                         />
                     </View>
                 </View>
+                {this.state.openLogin && <Login />}
             </View>
         );
     }
